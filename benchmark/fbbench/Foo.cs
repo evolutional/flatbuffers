@@ -6,17 +6,20 @@ namespace fbbench
 using System;
 using FlatBuffers;
 
-public sealed class Foo : Struct {
-  public Foo __init(int _i, ByteBuffer _bb) { bb_pos = _i; bb = _bb; return this; }
+public struct Foo : Accessor
+{
+  private Struct __p;
+  public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
+  public Foo __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public ulong Id { get { return bb.GetUlong(bb_pos + 0); } }
-  public void MutateId(ulong id) { bb.PutUlong(bb_pos + 0, id); }
-  public short Count { get { return bb.GetShort(bb_pos + 8); } }
-  public void MutateCount(short count) { bb.PutShort(bb_pos + 8, count); }
-  public sbyte Prefix { get { return bb.GetSbyte(bb_pos + 10); } }
-  public void MutatePrefix(sbyte prefix) { bb.PutSbyte(bb_pos + 10, prefix); }
-  public uint Length { get { return bb.GetUint(bb_pos + 12); } }
-  public void MutateLength(uint length) { bb.PutUint(bb_pos + 12, length); }
+  public ulong Id { get { return __p.bb.GetUlong(__p.bb_pos + 0); } }
+  public void MutateId(ulong id) { __p.bb.PutUlong(__p.bb_pos + 0, id); }
+  public short Count { get { return __p.bb.GetShort(__p.bb_pos + 8); } }
+  public void MutateCount(short count) { __p.bb.PutShort(__p.bb_pos + 8, count); }
+  public sbyte Prefix { get { return __p.bb.GetSbyte(__p.bb_pos + 10); } }
+  public void MutatePrefix(sbyte prefix) { __p.bb.PutSbyte(__p.bb_pos + 10, prefix); }
+  public uint Length { get { return __p.bb.GetUint(__p.bb_pos + 12); } }
+  public void MutateLength(uint length) { __p.bb.PutUint(__p.bb_pos + 12, length); }
 
   public static Offset<Foo> CreateFoo(FlatBufferBuilder builder, ulong Id, short Count, sbyte Prefix, uint Length) {
     builder.Prep(8, 16);

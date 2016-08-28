@@ -6,19 +6,21 @@ namespace fbbench
 using System;
 using FlatBuffers;
 
-public sealed class FooBar : Table {
+public struct FooBar : Accessor
+{
+  private Table __p;
   public static FooBar GetRootAsFooBar(ByteBuffer _bb) { return GetRootAsFooBar(_bb, new FooBar()); }
-  public static FooBar GetRootAsFooBar(ByteBuffer _bb, FooBar obj) { return (obj.__init(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
-  public FooBar __init(int _i, ByteBuffer _bb) { bb_pos = _i; bb = _bb; return this; }
+  public static FooBar GetRootAsFooBar(ByteBuffer _bb, FooBar obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
+  public FooBar __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public Bar Sibling { get { return GetSibling(new Bar()); } }
-  public Bar GetSibling(Bar obj) { int o = __offset(4); return o != 0 ? obj.__init(o + bb_pos, bb) : null; }
-  public string Name { get { int o = __offset(6); return o != 0 ? __string(o + bb_pos) : null; } }
-  public ArraySegment<byte>? GetNameBytes() { return __vector_as_arraysegment(6); }
-  public double Rating { get { int o = __offset(8); return o != 0 ? bb.GetDouble(o + bb_pos) : (double)0.0; } }
-  public bool MutateRating(double rating) { int o = __offset(8); if (o != 0) { bb.PutDouble(o + bb_pos, rating); return true; } else { return false; } }
-  public byte Postfix { get { int o = __offset(10); return o != 0 ? bb.Get(o + bb_pos) : (byte)0; } }
-  public bool MutatePostfix(byte postfix) { int o = __offset(10); if (o != 0) { bb.Put(o + bb_pos, postfix); return true; } else { return false; } }
+  public Bar? Sibling { get { int o = __p.__offset(4); return o != 0 ? (Bar?)(new Bar()).__assign(o + __p.bb_pos, __p.bb) : null; } }
+  public string Name { get { int o = __p.__offset(6); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public ArraySegment<byte>? GetNameBytes() { return __p.__vector_as_arraysegment(6); }
+  public double Rating { get { int o = __p.__offset(8); return o != 0 ? __p.bb.GetDouble(o + __p.bb_pos) : (double)0.0; } }
+  public bool MutateRating(double rating) { int o = __p.__offset(8); if (o != 0) { __p.bb.PutDouble(o + __p.bb_pos, rating); return true; } else { return false; } }
+  public byte Postfix { get { int o = __p.__offset(10); return o != 0 ? __p.bb.Get(o + __p.bb_pos) : (byte)0; } }
+  public bool MutatePostfix(byte postfix) { int o = __p.__offset(10); if (o != 0) { __p.bb.Put(o + __p.bb_pos, postfix); return true; } else { return false; } }
 
   public static void StartFooBar(FlatBufferBuilder builder) { builder.StartObject(4); }
   public static void AddSibling(FlatBufferBuilder builder, Offset<Bar> siblingOffset) { builder.AddStruct(0, siblingOffset.Value, 0); }

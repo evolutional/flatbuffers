@@ -38,6 +38,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\net\FlatBuffers\Accessor.cs">
+      <Link>FlatBuffers\Accessor.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\net\FlatBuffers\ByteBuffer.cs">
       <Link>FlatBuffers\ByteBuffer.cs</Link>
     </Compile>

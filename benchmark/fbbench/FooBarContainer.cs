@@ -6,20 +6,22 @@ namespace fbbench
 using System;
 using FlatBuffers;
 
-public sealed class FooBarContainer : Table {
+public struct FooBarContainer : Accessor
+{
+  private Table __p;
   public static FooBarContainer GetRootAsFooBarContainer(ByteBuffer _bb) { return GetRootAsFooBarContainer(_bb, new FooBarContainer()); }
-  public static FooBarContainer GetRootAsFooBarContainer(ByteBuffer _bb, FooBarContainer obj) { return (obj.__init(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
-  public FooBarContainer __init(int _i, ByteBuffer _bb) { bb_pos = _i; bb = _bb; return this; }
+  public static FooBarContainer GetRootAsFooBarContainer(ByteBuffer _bb, FooBarContainer obj) { return (obj.__assign(_bb.GetInt(_bb.Position) + _bb.Position, _bb)); }
+  public void __init(int _i, ByteBuffer _bb) { __p.bb_pos = _i; __p.bb = _bb; }
+  public FooBarContainer __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public FooBar GetList(int j) { return GetList(new FooBar(), j); }
-  public FooBar GetList(FooBar obj, int j) { int o = __offset(4); return o != 0 ? obj.__init(__indirect(__vector(o) + j * 4), bb) : null; }
-  public int ListLength { get { int o = __offset(4); return o != 0 ? __vector_len(o) : 0; } }
-  public bool Initialized { get { int o = __offset(6); return o != 0 ? 0!=bb.Get(o + bb_pos) : (bool)false; } }
-  public bool MutateInitialized(bool initialized) { int o = __offset(6); if (o != 0) { bb.Put(o + bb_pos, (byte)(initialized ? 1 : 0)); return true; } else { return false; } }
-  public AnEnum Fruit { get { int o = __offset(8); return o != 0 ? (AnEnum)bb.GetShort(o + bb_pos) : AnEnum.Apples; } }
-  public bool MutateFruit(AnEnum fruit) { int o = __offset(8); if (o != 0) { bb.PutShort(o + bb_pos, (short)fruit); return true; } else { return false; } }
-  public string Location { get { int o = __offset(10); return o != 0 ? __string(o + bb_pos) : null; } }
-  public ArraySegment<byte>? GetLocationBytes() { return __vector_as_arraysegment(10); }
+  public FooBar? List(int j) { int o = __p.__offset(4); return o != 0 ? (FooBar?)(new FooBar()).__assign(__p.__indirect(__p.__vector(o) + j * 4), __p.bb) : null; }
+  public int ListLength { get { int o = __p.__offset(4); return o != 0 ? __p.__vector_len(o) : 0; } }
+  public bool Initialized { get { int o = __p.__offset(6); return o != 0 ? 0!=__p.bb.Get(o + __p.bb_pos) : (bool)false; } }
+  public bool MutateInitialized(bool initialized) { int o = __p.__offset(6); if (o != 0) { __p.bb.Put(o + __p.bb_pos, (byte)(initialized ? 1 : 0)); return true; } else { return false; } }
+  public AnEnum Fruit { get { int o = __p.__offset(8); return o != 0 ? (AnEnum)__p.bb.GetShort(o + __p.bb_pos) : AnEnum.Apples; } }
+  public bool MutateFruit(AnEnum fruit) { int o = __p.__offset(8); if (o != 0) { __p.bb.PutShort(o + __p.bb_pos, (short)fruit); return true; } else { return false; } }
+  public string Location { get { int o = __p.__offset(10); return o != 0 ? __p.__string(o + __p.bb_pos) : null; } }
+  public ArraySegment<byte>? GetLocationBytes() { return __p.__vector_as_arraysegment(10); }
 
   public static Offset<FooBarContainer> CreateFooBarContainer(FlatBufferBuilder builder,
       VectorOffset listOffset = default(VectorOffset),

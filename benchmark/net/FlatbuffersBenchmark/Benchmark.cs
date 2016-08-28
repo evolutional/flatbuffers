@@ -5,10 +5,6 @@ namespace FlatBuffersBenchmark
 {
     public class Benchmark
     {
-        private readonly FooBar _fooBar = new FooBar();
-        private readonly Bar _bar = new Bar();
-        private readonly Foo _foo = new Foo();
-
         private const int VecLen = 3;
         private const string Location = "http://google.com/flatbuffers/";
         private const bool Initialized = true;
@@ -79,21 +75,20 @@ namespace FlatBuffersBenchmark
             var length = fooBarContainer.ListLength;
             for (var i = 0; i < length; i++)
             {
+                var fooBar = fooBarContainer.List(i);
+                sum += fooBar.Value.Name.Length;
+                sum += fooBar.Value.Postfix;
+                sum += (long)fooBar.Value.Rating;
 
-                fooBarContainer.GetList(_fooBar, i);
-                sum += _fooBar.Name.Length;
-                sum += _fooBar.Postfix;
-                sum += (long)_fooBar.Rating;
+                var bar = fooBar.Value.Sibling;
+                sum += bar.Value.Size;
+                sum += bar.Value.Time;
 
-                _fooBar.GetSibling(_bar);
-                sum += _bar.Size;
-                sum += _bar.Time;
-
-                _bar.GetParent(_foo);
-                sum += _foo.Count;
-                sum += (long)_foo.Id;
-                sum += _foo.Length;
-                sum += _foo.Prefix;
+                var foo = bar.Value.Parent;
+                sum += foo.Count;
+                sum += (long)foo.Id;
+                sum += foo.Length;
+                sum += foo.Prefix;
             }
 
             return sum;
