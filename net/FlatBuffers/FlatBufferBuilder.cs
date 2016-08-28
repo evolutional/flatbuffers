@@ -63,6 +63,20 @@ namespace FlatBuffers
         }
 
         /// <summary>
+        /// Create a FlatBufferBuilder with an existing ByteBuffer
+        /// </summary>
+        /// <param name="buffer">
+        /// The ByteBuffer to use.
+        /// </param>
+        public FlatBufferBuilder(ByteBuffer buffer)
+        {
+            if (buffer == null)
+                throw new ArgumentNullException("buffer");
+            _space = buffer.Length - buffer.Position;
+            _bb = buffer;
+        }
+
+        /// <summary>
         /// Reset the FlatBufferBuilder by purging all data that it holds.
         /// </summary>
         public void Clear()
