@@ -1,0 +1,1 @@
+.\..\Debug\flatc -n --no-includes --gen-mutable fbbench.fbs

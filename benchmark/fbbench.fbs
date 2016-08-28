@@ -1,0 +1,38 @@
+
+namespace fbbench;
+
+enum AnEnum : short {
+	Apples,
+	Pears,
+	Bananas,
+}
+
+struct Foo {
+	id: ulong;
+	count: short;
+	prefix: byte;
+	length:uint;
+}
+
+struct Bar {
+	parent: Foo;
+	time: int;
+	ratio: float;
+	size: ushort;
+}
+
+table FooBar {
+	sibling: Bar;
+	name: string;
+	rating: double;
+	postfix: ubyte;
+}
+
+table FooBarContainer {
+	list: [FooBar];
+	initialized: bool;
+	fruit: AnEnum;
+	location: string;
+}
+
+root_type FooBarContainer;

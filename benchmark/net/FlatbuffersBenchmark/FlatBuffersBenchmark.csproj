@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0BD0775D-7DDA-4D8D-9133-01970ABD12DC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FlatBuffersBenchmark</RootNamespace>
+    <AssemblyName>FlatBuffersBenchmark</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\net\FlatBuffers\ByteBuffer.cs">
+      <Link>FlatBuffers\ByteBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\net\FlatBuffers\FlatBufferBuilder.cs">
+      <Link>FlatBuffers\FlatBufferBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\net\FlatBuffers\FlatBufferConstants.cs">
+      <Link>FlatBuffers\FlatBufferConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\net\FlatBuffers\Offset.cs">
+      <Link>FlatBuffers\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\net\FlatBuffers\Struct.cs">
+      <Link>FlatBuffers\Struct.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\net\FlatBuffers\Table.cs">
+      <Link>FlatBuffers\Table.cs</Link>
+    </Compile>
+    <Compile Include="..\..\fbbench\AnEnum.cs">
+      <Link>fbbench\AnEnum.cs</Link>
+    </Compile>
+    <Compile Include="..\..\fbbench\Bar.cs">
+      <Link>fbbench\Bar.cs</Link>
+    </Compile>
+    <Compile Include="..\..\fbbench\Foo.cs">
+      <Link>fbbench\Foo.cs</Link>
+    </Compile>
+    <Compile Include="..\..\fbbench\FooBar.cs">
+      <Link>fbbench\FooBar.cs</Link>
+    </Compile>
+    <Compile Include="..\..\fbbench\FooBarContainer.cs">
+      <Link>fbbench\FooBarContainer.cs</Link>
+    </Compile>
+    <Compile Include="Benchmark.cs" />
+    <Compile Include="BenchmarkResult.cs" />
+    <Compile Include="BenchmarkRunner.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
