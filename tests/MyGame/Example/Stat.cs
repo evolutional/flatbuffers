@@ -8,6 +8,13 @@ namespace MyGame.Example
 using global::System;
 using global::FlatBuffers;
 
+public class StatT
+{
+  public string Id { get; set; }
+  public long Val { get; set; }
+  public ushort Count { get; set; }
+}
+
 public struct Stat : IFlatbufferObject
 {
   private Table __p;
@@ -42,6 +49,25 @@ public struct Stat : IFlatbufferObject
   public static Offset<Stat> EndStat(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     return new Offset<Stat>(o);
+  }
+  public static Offset<Stat> CreateStat(FlatBufferBuilder builder, StatT obj) {
+    StartStat(builder);
+    AddId(builder, obj.Id);
+    AddVal(builder, obj.Val);
+    AddCount(builder, obj.Count);
+    return EndStat(builder);
+  }
+  public StatT UnPack() 
+{
+    StatT obj = new StatT();
+    UnPackTo(obj);
+    return obj;
+  }
+  public void UnPackTo(StatT obj) 
+{
+    { string e = Id; if (e != null) obj.Id = e;  }
+    { long e = Val;obj.Val = e;  }
+    { ushort e = Count;obj.Count = e;  }
   }
 };
 

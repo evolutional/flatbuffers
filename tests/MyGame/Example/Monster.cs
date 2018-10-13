@@ -8,6 +8,39 @@ namespace MyGame.Example
 using global::System;
 using global::FlatBuffers;
 
+public class MonsterT
+{
+  public Vec3T? Pos { get; set; }
+  public short Mana { get; set; }
+  public short Hp { get; set; }
+  public string Name { get; set; }
+  public byte[] Inventory { get; set; }
+  public Color Color { get; set; }
+  public AnyUnion Test { get; set; }
+  public TestT?[] Test4 { get; set; }
+  public string[] Testarrayofstring { get; set; }
+  public MonsterT[] Testarrayoftables { get; set; }
+  public MonsterT Enemy { get; set; }
+  public byte[] Testnestedflatbuffer { get; set; }
+  public StatT Testempty { get; set; }
+  public bool Testbool { get; set; }
+  public int Testhashs32Fnv1 { get; set; }
+  public uint Testhashu32Fnv1 { get; set; }
+  public long Testhashs64Fnv1 { get; set; }
+  public ulong Testhashu64Fnv1 { get; set; }
+  public int Testhashs32Fnv1a { get; set; }
+  public uint Testhashu32Fnv1a { get; set; }
+  public long Testhashs64Fnv1a { get; set; }
+  public ulong Testhashu64Fnv1a { get; set; }
+  public bool[] Testarrayofbools { get; set; }
+  public float Testf { get; set; }
+  public float Testf2 { get; set; }
+  public float Testf3 { get; set; }
+  public string[] Testarrayofstring2 { get; set; }
+  public AbilityT?[] Testarrayofsortedstruct { get; set; }
+  public byte[] Flex { get; set; }
+}
+
 /// an example documentation comment: monster object
 public struct Monster : IFlatbufferObject
 {
@@ -166,6 +199,88 @@ public struct Monster : IFlatbufferObject
       }
     }
     return null;
+  }
+  public static Offset<Monster> CreateMonster(FlatBufferBuilder builder, MonsterT obj) {
+    StartMonster(builder);
+    if (obj.Pos != null) Vec3.CreateVec3(builder, obj.Pos.Value);
+    AddMana(builder, obj.Mana);
+    AddHp(builder, obj.Hp);
+    AddName(builder, obj.Name);
+    if (obj.Inventory != null) {      CreateInventoryVector(builder, obj.Inventory);
+    }
+    AddColor(builder, obj.Color);
+    AddTestType(builder, obj.TestType);
+    AddTest(builder, obj.Test);
+    if (obj.Test4 != null) {      CreateTest4Vector(builder, obj.Test4);
+    }
+    if (obj.Testarrayofstring != null) {      CreateTestarrayofstringVector(builder, obj.Testarrayofstring);
+    }
+    if (obj.Testarrayoftables != null) {      CreateTestarrayoftablesVector(builder, obj.Testarrayoftables);
+    }
+    if (obj.Enemy != null) Monster.CreateMonster(builder, obj.Enemy);
+    if (obj.Testnestedflatbuffer != null) {      CreateTestnestedflatbufferVector(builder, obj.Testnestedflatbuffer);
+    }
+    if (obj.Testempty != null) Stat.CreateStat(builder, obj.Testempty);
+    AddTestbool(builder, obj.Testbool);
+    AddTesthashs32Fnv1(builder, obj.Testhashs32Fnv1);
+    AddTesthashu32Fnv1(builder, obj.Testhashu32Fnv1);
+    AddTesthashs64Fnv1(builder, obj.Testhashs64Fnv1);
+    AddTesthashu64Fnv1(builder, obj.Testhashu64Fnv1);
+    AddTesthashs32Fnv1a(builder, obj.Testhashs32Fnv1a);
+    AddTesthashu32Fnv1a(builder, obj.Testhashu32Fnv1a);
+    AddTesthashs64Fnv1a(builder, obj.Testhashs64Fnv1a);
+    AddTesthashu64Fnv1a(builder, obj.Testhashu64Fnv1a);
+    if (obj.Testarrayofbools != null) {      CreateTestarrayofboolsVector(builder, obj.Testarrayofbools);
+    }
+    AddTestf(builder, obj.Testf);
+    AddTestf2(builder, obj.Testf2);
+    AddTestf3(builder, obj.Testf3);
+    if (obj.Testarrayofstring2 != null) {      CreateTestarrayofstring2Vector(builder, obj.Testarrayofstring2);
+    }
+    if (obj.Testarrayofsortedstruct != null) {      CreateTestarrayofsortedstructVector(builder, obj.Testarrayofsortedstruct);
+    }
+    if (obj.Flex != null) {      CreateFlexVector(builder, obj.Flex);
+    }
+    return EndMonster(builder);
+  }
+  public MonsterT UnPack() 
+{
+    MonsterT obj = new MonsterT();
+    UnPackTo(obj);
+    return obj;
+  }
+  public void UnPackTo(MonsterT obj) 
+{
+    { Vec3? e = Pos; if (e.HasValue) obj.Pos = e.Value.UnPack();  }
+    { short e = Mana;obj.Mana = e;  }
+    { short e = Hp;obj.Hp = e;  }
+    { string e = Name; if (e != null) obj.Name = e;  }
+    { int len = InventoryLength;if (len > 0) {byte[] e = new byte[len];for(int i = 0; i < len; ++i) { e[i] = Inventory(i); }}  }
+    { Color e = Color;obj.Color = e;  }
+    { Any e = TestType;obj.Test.Type = e;  }
+    { /* TODO */  }
+    { int len = Test4Length;if (len > 0) {Offset<Test>[] e = new Offset<Test>[len];for(int i = 0; i < len; ++i) { e[i] = Test4(i); }}  }
+    { int len = TestarrayofstringLength;if (len > 0) {StringOffset[] e = new StringOffset[len];for(int i = 0; i < len; ++i) { e[i] = Testarrayofstring(i); }}  }
+    { int len = TestarrayoftablesLength;if (len > 0) {Offset<Monster>[] e = new Offset<Monster>[len];for(int i = 0; i < len; ++i) { e[i] = Testarrayoftables(i); }}  }
+    { Monster? e = Enemy; if (e.HasValue) obj.Enemy = e.Value.UnPack();  }
+    { int len = TestnestedflatbufferLength;if (len > 0) {byte[] e = new byte[len];for(int i = 0; i < len; ++i) { e[i] = Testnestedflatbuffer(i); }}  }
+    { Stat? e = Testempty; if (e.HasValue) obj.Testempty = e.Value.UnPack();  }
+    { bool e = Testbool;obj.Testbool = e;  }
+    { int e = Testhashs32Fnv1;obj.Testhashs32Fnv1 = e;  }
+    { uint e = Testhashu32Fnv1;obj.Testhashu32Fnv1 = e;  }
+    { long e = Testhashs64Fnv1;obj.Testhashs64Fnv1 = e;  }
+    { ulong e = Testhashu64Fnv1;obj.Testhashu64Fnv1 = e;  }
+    { int e = Testhashs32Fnv1a;obj.Testhashs32Fnv1a = e;  }
+    { uint e = Testhashu32Fnv1a;obj.Testhashu32Fnv1a = e;  }
+    { long e = Testhashs64Fnv1a;obj.Testhashs64Fnv1a = e;  }
+    { ulong e = Testhashu64Fnv1a;obj.Testhashu64Fnv1a = e;  }
+    { int len = TestarrayofboolsLength;if (len > 0) {bool[] e = new bool[len];for(int i = 0; i < len; ++i) { e[i] = Testarrayofbools(i); }}  }
+    { float e = Testf;obj.Testf = e;  }
+    { float e = Testf2;obj.Testf2 = e;  }
+    { float e = Testf3;obj.Testf3 = e;  }
+    { int len = Testarrayofstring2Length;if (len > 0) {StringOffset[] e = new StringOffset[len];for(int i = 0; i < len; ++i) { e[i] = Testarrayofstring2(i); }}  }
+    { int len = TestarrayofsortedstructLength;if (len > 0) {Offset<Ability>[] e = new Offset<Ability>[len];for(int i = 0; i < len; ++i) { e[i] = Testarrayofsortedstruct(i); }}  }
+    { int len = FlexLength;if (len > 0) {byte[] e = new byte[len];for(int i = 0; i < len; ++i) { e[i] = Flex(i); }}  }
   }
 };
 

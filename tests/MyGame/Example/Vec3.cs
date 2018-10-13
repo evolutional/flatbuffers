@@ -8,6 +8,16 @@ namespace MyGame.Example
 using global::System;
 using global::FlatBuffers;
 
+public struct Vec3T
+{
+  public float X { get; set; }
+  public float Y { get; set; }
+  public float Z { get; set; }
+  public double Test1 { get; set; }
+  public Color Test2 { get; set; }
+  public TestT? Test3 { get; set; }
+}
+
 public struct Vec3 : IFlatbufferObject
 {
   private Struct __p;
@@ -42,6 +52,24 @@ public struct Vec3 : IFlatbufferObject
     builder.PutFloat(Y);
     builder.PutFloat(X);
     return new Offset<Vec3>(builder.Offset);
+  }
+  public static Offset<Vec3> CreateVec3(FlatBufferBuilder builder, Vec3T obj) {
+     return CreateVec3(builder, );
+  }
+  public Vec3T UnPack() 
+{
+    Vec3T obj = new Vec3T();
+    UnPackTo(obj);
+    return obj;
+  }
+  public void UnPackTo(Vec3T obj) 
+{
+    { float e = X;obj.X = e;  }
+    { float e = Y;obj.Y = e;  }
+    { float e = Z;obj.Z = e;  }
+    { double e = Test1;obj.Test1 = e;  }
+    { Color e = Test2;obj.Test2 = e;  }
+    { Test e = Test3;obj.Test3 = e.UnPack();  }
   }
 };
 

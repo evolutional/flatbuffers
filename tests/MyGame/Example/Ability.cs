@@ -8,6 +8,12 @@ namespace MyGame.Example
 using global::System;
 using global::FlatBuffers;
 
+public struct AbilityT
+{
+  public uint Id { get; set; }
+  public uint Distance { get; set; }
+}
+
 public struct Ability : IFlatbufferObject
 {
   private Struct __p;
@@ -25,6 +31,20 @@ public struct Ability : IFlatbufferObject
     builder.PutUint(Distance);
     builder.PutUint(Id);
     return new Offset<Ability>(builder.Offset);
+  }
+  public static Offset<Ability> CreateAbility(FlatBufferBuilder builder, AbilityT obj) {
+     return CreateAbility(builder, );
+  }
+  public AbilityT UnPack() 
+{
+    AbilityT obj = new AbilityT();
+    UnPackTo(obj);
+    return obj;
+  }
+  public void UnPackTo(AbilityT obj) 
+{
+    { uint e = Id;obj.Id = e;  }
+    { uint e = Distance;obj.Distance = e;  }
   }
 };
 

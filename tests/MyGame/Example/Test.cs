@@ -8,6 +8,12 @@ namespace MyGame.Example
 using global::System;
 using global::FlatBuffers;
 
+public struct TestT
+{
+  public short A { get; set; }
+  public sbyte B { get; set; }
+}
+
 public struct Test : IFlatbufferObject
 {
   private Struct __p;
@@ -26,6 +32,20 @@ public struct Test : IFlatbufferObject
     builder.PutSbyte(B);
     builder.PutShort(A);
     return new Offset<Test>(builder.Offset);
+  }
+  public static Offset<Test> CreateTest(FlatBufferBuilder builder, TestT obj) {
+     return CreateTest(builder, );
+  }
+  public TestT UnPack() 
+{
+    TestT obj = new TestT();
+    UnPackTo(obj);
+    return obj;
+  }
+  public void UnPackTo(TestT obj) 
+{
+    { short e = A;obj.A = e;  }
+    { sbyte e = B;obj.B = e;  }
   }
 };
 

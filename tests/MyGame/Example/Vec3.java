@@ -8,6 +8,15 @@ import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
+public final class Vec3T {
+  public float x;
+  public float y;
+  public float z;
+  public double test1;
+  public byte test2;
+  public TestT test3;
+}
+
 public final class Vec3 extends Struct {
   public void __init(int _i, ByteBuffer _bb) { bb_pos = _i; bb = _bb; }
   public Vec3 __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
@@ -40,6 +49,22 @@ public final class Vec3 extends Struct {
     builder.putFloat(y);
     builder.putFloat(x);
     return builder.offset();
+  }
+  public static int CreateVec3(FlatBufferBuilder builder, Vec3T obj) {
+     return CreateVec3(builder, );
+  }
+  public Vec3T unPack()  {
+    Vec3T obj = new Vec3T();
+    unPackTo(obj);
+    return obj;
+  }
+  public void unPackTo(Vec3T obj)  {
+    { float e = x;obj.x = e;  }
+    { float e = y;obj.y = e;  }
+    { float e = z;obj.z = e;  }
+    { double e = test1;obj.test1 = e;  }
+    { byte e = test2;obj.test2 = e;  }
+    { Test e = test3;obj.test3 = e.UnPack();  }
   }
 }
 

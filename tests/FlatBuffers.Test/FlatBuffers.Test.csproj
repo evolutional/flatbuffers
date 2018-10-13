@@ -59,6 +59,9 @@
     <Compile Include="..\..\net\FlatBuffers\Table.cs">
       <Link>FlatBuffers\Table.cs</Link>
     </Compile>
+    <Compile Include="..\MyGame\Example2\Monster.cs">
+      <Link>MyGame\Example2\Monster.cs</Link>
+    </Compile>
     <Compile Include="..\MyGame\Example\Any.cs">
       <Link>MyGame\Example\Any.cs</Link>
     </Compile>
@@ -114,6 +117,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

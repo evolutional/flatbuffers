@@ -8,6 +8,12 @@ import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
+public final class StatT {
+  public String id;
+  public long val;
+  public short count;
+}
+
 public final class Stat extends Table {
   public static Stat getRootAsStat(ByteBuffer _bb) { return getRootAsStat(_bb, new Stat()); }
   public static Stat getRootAsStat(ByteBuffer _bb, Stat obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
@@ -39,6 +45,23 @@ public final class Stat extends Table {
   public static int endStat(FlatBufferBuilder builder) {
     int o = builder.endObject();
     return o;
+  }
+  public static int CreateStat(FlatBufferBuilder builder, StatT obj) {
+    StartStat(builder);
+    AddId(builder, obj.id);
+    AddVal(builder, obj.val);
+    AddCount(builder, obj.count);
+    return EndStat(builder);
+  }
+  public StatT unPack()  {
+    StatT obj = new StatT();
+    unPackTo(obj);
+    return obj;
+  }
+  public void unPackTo(StatT obj)  {
+    { String e = id; if (e != null) obj.id = e;  }
+    { long e = val;obj.val = e;  }
+    { int e = count;obj.count = e;  }
   }
 }
 

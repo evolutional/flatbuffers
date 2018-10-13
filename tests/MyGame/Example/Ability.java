@@ -8,6 +8,11 @@ import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
+public final class AbilityT {
+  public int id;
+  public int distance;
+}
+
 public final class Ability extends Struct {
   public void __init(int _i, ByteBuffer _bb) { bb_pos = _i; bb = _bb; }
   public Ability __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
@@ -22,6 +27,18 @@ public final class Ability extends Struct {
     builder.putInt((int)distance);
     builder.putInt((int)id);
     return builder.offset();
+  }
+  public static int CreateAbility(FlatBufferBuilder builder, AbilityT obj) {
+     return CreateAbility(builder, );
+  }
+  public AbilityT unPack()  {
+    AbilityT obj = new AbilityT();
+    unPackTo(obj);
+    return obj;
+  }
+  public void unPackTo(AbilityT obj)  {
+    { long e = id;obj.id = e;  }
+    { long e = distance;obj.distance = e;  }
   }
 }
 

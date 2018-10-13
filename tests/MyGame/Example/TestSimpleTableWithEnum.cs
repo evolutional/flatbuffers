@@ -8,6 +8,11 @@ namespace MyGame.Example
 using global::System;
 using global::FlatBuffers;
 
+public class TestSimpleTableWithEnumT
+{
+  public Color Color { get; set; }
+}
+
 public partial struct TestSimpleTableWithEnum : IFlatbufferObject
 {
   private Table __p;
@@ -32,6 +37,21 @@ public partial struct TestSimpleTableWithEnum : IFlatbufferObject
   public static Offset<TestSimpleTableWithEnum> EndTestSimpleTableWithEnum(FlatBufferBuilder builder) {
     int o = builder.EndObject();
     return new Offset<TestSimpleTableWithEnum>(o);
+  }
+  public static Offset<TestSimpleTableWithEnum> CreateTestSimpleTableWithEnum(FlatBufferBuilder builder, TestSimpleTableWithEnumT obj) {
+    StartTestSimpleTableWithEnum(builder);
+    AddColor(builder, obj.Color);
+    return EndTestSimpleTableWithEnum(builder);
+  }
+  public TestSimpleTableWithEnumT UnPack() 
+{
+    TestSimpleTableWithEnumT obj = new TestSimpleTableWithEnumT();
+    UnPackTo(obj);
+    return obj;
+  }
+  public void UnPackTo(TestSimpleTableWithEnumT obj) 
+{
+    { Color e = Color;obj.Color = e;  }
   }
 };
 

@@ -14,3 +14,19 @@ public final class Any {
   public static String name(int e) { return names[e]; }
 }
 
+publicfinal  class AnyUnion {
+  public Any type;
+  public Object value;
+  public MonsterT AsMonster(){ return type == JAVA FIXME ? (MonsterT)value : null; }
+  public TestSimpleTableWithEnumT AsTestSimpleTableWithEnum(){ return type == JAVA FIXME ? (TestSimpleTableWithEnumT)value : null; }
+  public MyGame.Example2.MonsterT AsMyGame_Example2_Monster(){ return type == JAVA FIXME ? (MyGame.Example2.MonsterT)value : null; }
+  public static Object UnPack(Object obj, Any type){
+    switch(type) {
+    case Any.NONE: return null;
+    case Any.Monster: return ((Monster)obj).UnPack();
+    case Any.TestSimpleTableWithEnum: return ((TestSimpleTableWithEnum)obj).UnPack();
+    case Any.MyGame_Example2_Monster: return ((MyGame.Example2.Monster)obj).UnPack();
+    default: return null;
+    }
+  }}
+

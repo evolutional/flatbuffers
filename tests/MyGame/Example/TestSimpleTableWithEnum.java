@@ -8,6 +8,10 @@ import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
+public final class TestSimpleTableWithEnumT {
+  public byte color;
+}
+
 public final class TestSimpleTableWithEnum extends Table {
   public static TestSimpleTableWithEnum getRootAsTestSimpleTableWithEnum(ByteBuffer _bb) { return getRootAsTestSimpleTableWithEnum(_bb, new TestSimpleTableWithEnum()); }
   public static TestSimpleTableWithEnum getRootAsTestSimpleTableWithEnum(ByteBuffer _bb, TestSimpleTableWithEnum obj) { _bb.order(ByteOrder.LITTLE_ENDIAN); return (obj.__assign(_bb.getInt(_bb.position()) + _bb.position(), _bb)); }
@@ -29,6 +33,19 @@ public final class TestSimpleTableWithEnum extends Table {
   public static int endTestSimpleTableWithEnum(FlatBufferBuilder builder) {
     int o = builder.endObject();
     return o;
+  }
+  public static int CreateTestSimpleTableWithEnum(FlatBufferBuilder builder, TestSimpleTableWithEnumT obj) {
+    StartTestSimpleTableWithEnum(builder);
+    AddColor(builder, obj.color);
+    return EndTestSimpleTableWithEnum(builder);
+  }
+  public TestSimpleTableWithEnumT unPack()  {
+    TestSimpleTableWithEnumT obj = new TestSimpleTableWithEnumT();
+    unPackTo(obj);
+    return obj;
+  }
+  public void unPackTo(TestSimpleTableWithEnumT obj)  {
+    { byte e = color;obj.color = e;  }
   }
 }
 

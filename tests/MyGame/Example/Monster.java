@@ -8,6 +8,38 @@ import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
+public final class MonsterT {
+  public Vec3T pos;
+  public short mana;
+  public short hp;
+  public String name;
+  public byte[] inventory;
+  public byte color;
+  public AnyUnion test;
+  public TestT[] test4;
+  public String[] testarrayofstring;
+  public MonsterT[] testarrayoftables;
+  public MonsterT enemy;
+  public byte[] testnestedflatbuffer;
+  public StatT testempty;
+  public boolean testbool;
+  public int testhashs32Fnv1;
+  public int testhashu32Fnv1;
+  public long testhashs64Fnv1;
+  public long testhashu64Fnv1;
+  public int testhashs32Fnv1a;
+  public int testhashu32Fnv1a;
+  public long testhashs64Fnv1a;
+  public long testhashu64Fnv1a;
+  public boolean[] testarrayofbools;
+  public float testf;
+  public float testf2;
+  public float testf3;
+  public String[] testarrayofstring2;
+  public AbilityT[] testarrayofsortedstruct;
+  public byte[] flex;
+}
+
 /**
  * an example documentation comment: monster object
  */
@@ -172,6 +204,86 @@ public final class Monster extends Table {
       }
     }
     return null;
+  }
+  public static int CreateMonster(FlatBufferBuilder builder, MonsterT obj) {
+    StartMonster(builder);
+    if (obj.pos != null) Vec3.CreateVec3(builder, obj.pos);
+    AddMana(builder, obj.mana);
+    AddHp(builder, obj.hp);
+    AddName(builder, obj.name);
+    if (obj.inventory != null) {      CreateInventoryVector(builder, obj.inventory);
+    }
+    AddColor(builder, obj.color);
+    AddTestType(builder, obj.testType);
+    AddTest(builder, obj.test);
+    if (obj.test4 != null) {      CreateTest4Vector(builder, obj.test4);
+    }
+    if (obj.testarrayofstring != null) {      CreateTestarrayofstringVector(builder, obj.testarrayofstring);
+    }
+    if (obj.testarrayoftables != null) {      CreateTestarrayoftablesVector(builder, obj.testarrayoftables);
+    }
+    if (obj.enemy != null) Monster.CreateMonster(builder, obj.enemy);
+    if (obj.testnestedflatbuffer != null) {      CreateTestnestedflatbufferVector(builder, obj.testnestedflatbuffer);
+    }
+    if (obj.testempty != null) Stat.CreateStat(builder, obj.testempty);
+    AddTestbool(builder, obj.testbool);
+    AddTesthashs32Fnv1(builder, obj.testhashs32Fnv1);
+    AddTesthashu32Fnv1(builder, obj.testhashu32Fnv1);
+    AddTesthashs64Fnv1(builder, obj.testhashs64Fnv1);
+    AddTesthashu64Fnv1(builder, obj.testhashu64Fnv1);
+    AddTesthashs32Fnv1a(builder, obj.testhashs32Fnv1a);
+    AddTesthashu32Fnv1a(builder, obj.testhashu32Fnv1a);
+    AddTesthashs64Fnv1a(builder, obj.testhashs64Fnv1a);
+    AddTesthashu64Fnv1a(builder, obj.testhashu64Fnv1a);
+    if (obj.testarrayofbools != null) {      CreateTestarrayofboolsVector(builder, obj.testarrayofbools);
+    }
+    AddTestf(builder, obj.testf);
+    AddTestf2(builder, obj.testf2);
+    AddTestf3(builder, obj.testf3);
+    if (obj.testarrayofstring2 != null) {      CreateTestarrayofstring2Vector(builder, obj.testarrayofstring2);
+    }
+    if (obj.testarrayofsortedstruct != null) {      CreateTestarrayofsortedstructVector(builder, obj.testarrayofsortedstruct);
+    }
+    if (obj.flex != null) {      CreateFlexVector(builder, obj.flex);
+    }
+    return EndMonster(builder);
+  }
+  public MonsterT unPack()  {
+    MonsterT obj = new MonsterT();
+    unPackTo(obj);
+    return obj;
+  }
+  public void unPackTo(MonsterT obj)  {
+    { Vec3 e = pos;obj.pos = e.UnPack();  }
+    { short e = mana;obj.mana = e;  }
+    { short e = hp;obj.hp = e;  }
+    { String e = name; if (e != null) obj.name = e;  }
+    { int len = inventoryLength;if (len > 0) {byte[] e = new byte[len];for(int i = 0; i < len; ++i) { e[i] = inventory(i); }}  }
+    { byte e = color;obj.color = e;  }
+    { byte e = testType;obj.test.type = e;  }
+    { /* TODO */  }
+    { int len = test4Length;if (len > 0) {int[] e = new int[len];for(int i = 0; i < len; ++i) { e[i] = test4(i); }}  }
+    { int len = testarrayofstringLength;if (len > 0) {int[] e = new int[len];for(int i = 0; i < len; ++i) { e[i] = testarrayofstring(i); }}  }
+    { int len = testarrayoftablesLength;if (len > 0) {int[] e = new int[len];for(int i = 0; i < len; ++i) { e[i] = testarrayoftables(i); }}  }
+    { Monster e = enemy; if (e != null) obj.enemy = e.UnPack();  }
+    { int len = testnestedflatbufferLength;if (len > 0) {byte[] e = new byte[len];for(int i = 0; i < len; ++i) { e[i] = testnestedflatbuffer(i); }}  }
+    { Stat e = testempty; if (e != null) obj.testempty = e.UnPack();  }
+    { boolean e = testbool;obj.testbool = e;  }
+    { int e = testhashs32Fnv1;obj.testhashs32Fnv1 = e;  }
+    { long e = testhashu32Fnv1;obj.testhashu32Fnv1 = e;  }
+    { long e = testhashs64Fnv1;obj.testhashs64Fnv1 = e;  }
+    { long e = testhashu64Fnv1;obj.testhashu64Fnv1 = e;  }
+    { int e = testhashs32Fnv1a;obj.testhashs32Fnv1a = e;  }
+    { long e = testhashu32Fnv1a;obj.testhashu32Fnv1a = e;  }
+    { long e = testhashs64Fnv1a;obj.testhashs64Fnv1a = e;  }
+    { long e = testhashu64Fnv1a;obj.testhashu64Fnv1a = e;  }
+    { int len = testarrayofboolsLength;if (len > 0) {boolean[] e = new boolean[len];for(int i = 0; i < len; ++i) { e[i] = testarrayofbools(i); }}  }
+    { float e = testf;obj.testf = e;  }
+    { float e = testf2;obj.testf2 = e;  }
+    { float e = testf3;obj.testf3 = e;  }
+    { int len = testarrayofstring2Length;if (len > 0) {int[] e = new int[len];for(int i = 0; i < len; ++i) { e[i] = testarrayofstring2(i); }}  }
+    { int len = testarrayofsortedstructLength;if (len > 0) {int[] e = new int[len];for(int i = 0; i < len; ++i) { e[i] = testarrayofsortedstruct(i); }}  }
+    { int len = flexLength;if (len > 0) {byte[] e = new byte[len];for(int i = 0; i < len; ++i) { e[i] = flex(i); }}  }
   }
 }
 

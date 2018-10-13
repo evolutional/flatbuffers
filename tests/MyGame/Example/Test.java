@@ -8,6 +8,11 @@ import java.util.*;
 import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
+public final class TestT {
+  public short a;
+  public byte b;
+}
+
 public final class Test extends Struct {
   public void __init(int _i, ByteBuffer _bb) { bb_pos = _i; bb = _bb; }
   public Test __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
@@ -23,6 +28,18 @@ public final class Test extends Struct {
     builder.putByte(b);
     builder.putShort(a);
     return builder.offset();
+  }
+  public static int CreateTest(FlatBufferBuilder builder, TestT obj) {
+     return CreateTest(builder, );
+  }
+  public TestT unPack()  {
+    TestT obj = new TestT();
+    unPackTo(obj);
+    return obj;
+  }
+  public void unPackTo(TestT obj)  {
+    { short e = a;obj.a = e;  }
+    { byte e = b;obj.b = e;  }
   }
 }
 
